@@ -1,9 +1,26 @@
+# Correcao primeira issue
+resource "aws_flow_log" "example" {
+  log_destination      = "arn:aws:s3:::terraform-state-rodrigont-clc16-024570531943-us-east-1-an"
+  log_destination_type = "s3"
+  traffic_type         = "ALL"
+  vpc_id               = aws_vpc.clc_vpc.id
+}
+
+# Correcao segunda issue
+resource "aws_default_security_group" "default" {
+  vpc_id = aws_vpc.clc_vpc.id
+  
+  tags = {
+    Name = "${var.vpc_name}-default-sg"
+  }
+}
+
 resource "aws_vpc" "clc_vpc" {
   cidr_block       = "172.16.0.0/16"
   instance_tenancy = "default"
 
   tags = {
-    Name = "${var.vpc_name}_${var.env}"
+    Name = "${var.vpc_name}-${var.env}"
   }
 }
 
@@ -12,7 +29,7 @@ resource "aws_subnet" "public_subnet_1a" {
   cidr_block = "172.16.1.0/24"
   availability_zone = "us-east-1a" 
   tags = {
-    Name = "${var.pub_subnet_1a_name}_${var.env}"
+    Name = "${var.pub_subnet_1a_name}-${var.env}"
   }
 }
 
@@ -21,7 +38,7 @@ resource "aws_subnet" "private_subnet_1a" {
   cidr_block = "172.16.10.0/24"
   availability_zone = "us-east-1a" 
   tags = {
-    Name = "${var.priv_subnet_1a_name}_${var.env}"
+    Name = "${var.priv_subnet_1a_name}-${var.env}"
   }
 }
 
@@ -102,7 +119,7 @@ resource "aws_subnet" "public_subnet_1c" {
   availability_zone = "us-east-1c"
 
   tags = {
-    Name = "${var.pub_subnet_1c_name}_${var.env}"
+    Name = "${var.pub_subnet_1c_name}-${var.env}"
   }
 }
 
@@ -113,7 +130,7 @@ resource "aws_subnet" "private_subnet_1c" {
   availability_zone = "us-east-1c"
 
   tags = {
-    Name = "${var.priv_subnet_1c_name}_${var.env}"
+    Name = "${var.priv_subnet_1c_name}-${var.env}"
   }
 }
 
