@@ -1,11 +1,11 @@
 variable "env" {
     type = string
-    default = "Homolog"
+    default = "prd"
 }
 
 variable "vpc_name" {
     type = string
-    default = "terraform-vpc"
+    default = "rodrigo-novato-tf"
 }
 
 variable "pub_subnet_1a_name" {
